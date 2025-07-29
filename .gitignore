@@ -6,4 +6,4 @@ __pycache__/
 *.pyc
 
 # Éventuelles données
-data/
+data/MNIST/raw/
