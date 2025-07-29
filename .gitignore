@@ -1,0 +1,9 @@
+# Ignorer l'environnement virtuel
+.venv/
+
+# Fichiers Python inutiles
+__pycache__/
+*.pyc
+
+# Éventuelles données
+data/
