@@ -8,7 +8,7 @@ import onnxruntime as ort
 # ====== Config ======
 EPOCHS = 5
 BATCH_SIZE = 64
-EXPORT_PATH = "web/mnist.onnx"
+EXPORT_PATH = "mnist.onnx"
 
 device = torch.device("cpu")
 
