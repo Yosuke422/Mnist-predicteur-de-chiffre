@@ -5,6 +5,7 @@ import torchvision
 import torchvision.transforms as transforms
 import onnxruntime as ort
 from torch.utils.tensorboard import SummaryWriter
+import datetime
 
 EPOCHS = 5
 BATCH_SIZE = 64
@@ -45,8 +46,11 @@ model = CNN().to(device)
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 criterion = nn.CrossEntropyLoss()
 
-# TensorBoard writer
-writer = SummaryWriter('runs/mnist_experiment')
+# TensorBoard writer with timestamp
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+experiment_name = f"mnist_experiment_{timestamp}"
+writer = SummaryWriter(f'runs/{experiment_name}')
+print(f"TensorBoard logs will be saved to: runs/{experiment_name}")
 
 print("\n Training...\n")
 for epoch in range(EPOCHS):
@@ -98,6 +102,6 @@ print(f"Exported model to {EXPORT_PATH}")
 
 # Close TensorBoard writer
 writer.close()
-print("TensorBoard logs saved to 'runs/mnist_experiment'")
+print(f"TensorBoard logs saved to 'runs/{experiment_name}'")
 
 
