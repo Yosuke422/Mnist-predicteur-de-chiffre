@@ -7,3 +7,4 @@ __pycache__/
 
 # Éventuelles données
 data/MNIST/raw/
+runs

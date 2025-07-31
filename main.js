@@ -108,7 +108,6 @@ function preprocessImage() {
 }
 
 async function predict() {
-  
   const input = preprocessImage();
   
   if (!input) {
@@ -120,9 +119,7 @@ async function predict() {
   
   try {
     const session = await ort.InferenceSession.create("mnist.onnx");
-    
     const output = await session.run({ input: tensor });
-    
     const logits = output.output.data;
     
     if (!logits || logits.length === 0) {
@@ -135,14 +132,14 @@ async function predict() {
     const sumExpLogits = expLogits.reduce((sum, exp) => sum + exp, 0);
     const probabilities = expLogits.map(exp => exp / sumExpLogits);
     
-    
+    // Get top prediction
     const predictions = [];
     for (let i = 0; i < probabilities.length; i++) {
       predictions.push({ digit: i, probability: probabilities[i] });
     }
     predictions.sort((a, b) => b.probability - a.probability);
     
-      const topPrediction = predictions[0];
+    const topPrediction = predictions[0];
     
     if (!topPrediction || typeof topPrediction.digit === 'undefined') {
       throw new Error("Invalid prediction structure");
@@ -153,7 +150,6 @@ async function predict() {
     let resultText = `Predicted: ${topPrediction.digit} (${(confidence * 100).toFixed(1)}%)`;
        
     document.getElementById("result").innerText = resultText;
-    
     
   } catch (err) {
     console.error("Inference error:", err);
